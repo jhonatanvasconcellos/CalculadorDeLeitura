@@ -1,17 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Calculadora de Leitura
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div id="cabecalho">
+    <h1>Bem vindo(a), Leitor(a)</h1>
+    <ul>
+      <li>Pegue um Livro e Informe abaixo a quantidade de páginas dele.</li>
+      <li>Abra-o em uma página(preferencialmente uma que contenha texto do inicio ao fim,semelhante à figura abaixo).
+      </li>
+      <li>Feito isso, clique no botão <strong>Iniciar</strong> e faça a leitura.</li>
+      <li>Após finalizar, clique no botão <strong>Parar.</strong></li>
+    </ul>
+
+    <img src="../../assets/img/livro.png"/>
+  </div>
+
+  <div id="formulario">
+    <ion-input placeholder="Informe a quantidade de páginas do livro" [(ngModel)]="quantPaginas"></ion-input>
+    <ion-button *ngIf="cronometroIniciado == false" expand="block" shape="round" (click)="start()">Iniciar</ion-button>
+    <ion-button *ngIf="cronometroIniciado == true" expand="block" shape="round" (click)="stop()" color="danger">Parar</ion-button>
+  </div>
+
+  <div id="timer" *ngIf="cronometroIniciado == true">
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Clock-with-one-second-time-counter-animated.gif"/>
+  </div>
+
+  <div id="resultado" *ngIf="cronometroIniciado == false && resultado != null">
+    <br>
+    <ion-label>Tempo Estimado para você concluir o Livro</ion-label>
+    <br>
+    <ion-label></ion-label>
+    <br>
+    <ion-label id="labelResultado">{{resultado}}</ion-label>
+    <br>
+    <ion-button color="warning" (click)="reiniciar()">Reiniciar</ion-button>
+
+  </div>
+
+  <p>Aplicativo Desenvolvido por <br>Jhonatan Salgado - 2021 <br><br>Imagens by Wikimedia Commons</p>
+
 </ion-content>
